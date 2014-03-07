@@ -58,7 +58,7 @@ public class AnimatedPictureViewer extends JFrame{
       
 	getContentPane().addMouseListener(new MouseAdapter() {
 		public void mouseEntered(MouseEvent e){
-		    animate = new animateation();
+		    animate = new Animation();
 		    animate.start();
 		}
 
@@ -88,24 +88,16 @@ public class AnimatedPictureViewer extends JFrame{
        }
     }
     
-    class animateation extends Thread {
+    class Animation extends Thread {
 	public void run() {
 	    try {
 		while (true) {
-		    // Bounce off the walls
-
-		    if (x > frameW - pieRadius - 30) { dx = -5; } 
-		    if (y > frameH - pieRadius - 30) {dy = -5; }
-		    if (x < pieRadius + 20) { dx = 5; }
-		    if (y < pieRadius + 20){ dy = 5; }      
-		    if (pieRadius < 50) { dr = 5; }
-		    if (pieRadius > 100) { dr = -5; }      
+		    //new dientions for the apple pie
 		    
-		    x += dx;   
-		    y += dy;  
-		    pieRadius += dr;   
-		    colorIndex = (int)(Math.random() * 7);      
-            
+		    newDimentions();
+
+		    // random color
+		    colorIndex = (int)(Math.random() * 7);    
 		    panel.repaint();
 		    Thread.sleep(75);
 		}
@@ -118,5 +110,20 @@ public class AnimatedPictureViewer extends JFrame{
 		}
 	    }
 	}
-    }    
+    } 
+
+
+    public void newDimentions(){
+	 if (x > frameW - pieRadius - 30) { dx = -5; } 
+	 if (y > frameH - pieRadius - 30) { dy = -5; }
+	 if (x < pieRadius + 20) { dx = 5; }
+	 if (y < pieRadius + 20){ dy = 5; }      
+	 if (pieRadius < 50) { dr = 5; }
+	 if (pieRadius > 100) { dr = -5; }      
+		    
+	 x += dx;   
+	 y += dy;  
+	 pieRadius += dr;   
+		    
+    }
 }
