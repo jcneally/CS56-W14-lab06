@@ -17,8 +17,8 @@ public class AnimatedPictureViewer {
     private double r = 0;
     private double w = 0;
 
-    private int dr = 2;
-    private int dw = 2;
+    private int dr = 0;
+    private int dw = 0;
 
     public static void main (String[] args) {
       new AnimatedPictureViewer().go();
@@ -72,16 +72,15 @@ public class AnimatedPictureViewer {
         try {
           while (true) {
 
-            if (w >= 320) {
-		dr = -1;
-		dw = -1;
+	    if (r <= 3) {
+		dr = 2; 
+		dw = 2;
 	    }
-	    if (w <= 1) {
-		dr = 1; 
-		dw = 1;
+            if (r >= 320) {
+		dr = -2;
+		dw = -2;
 	    }
 	    
-            
 	    r += dr;
 	    w += dw;
             panel.repaint();
