@@ -75,13 +75,6 @@ public class AnimatedPictureViewer {
 	TireSwing test = new TireSwing(x, y, r, w);
 	g2.rotate(Math.toRadians(drad), x, y);
 	g2.draw(test);
-
-	// Draw the TireSwing
-	g2.setStroke(thick);
-	g2.setColor(randColor);
-	TireSwing test2 = new TireSwing(x, y, r, w);
-	g2.rotate(Math.toRadians(drad + 10), x, y);
-	g2.draw(test2);
        }
     }
     
