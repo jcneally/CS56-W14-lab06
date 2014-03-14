@@ -3,6 +3,7 @@ package edu.ucsb.cs56.w14.drawings.blakezimmerman.advanced;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 
 public class AnimatedPictureViewer {
 
@@ -17,8 +18,11 @@ public class AnimatedPictureViewer {
     private double r = 0;
     private double w = 0;
 
+    private double drad = 0;
     private int dr = 0;
     private int dw = 0;
+
+    Stroke thick = new BasicStroke(4.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL);
 
     public static void main (String[] args) {
       new AnimatedPictureViewer().go();
@@ -56,14 +60,28 @@ public class AnimatedPictureViewer {
 
         Graphics2D g2 = (Graphics2D) g;
 
-         // Clear the panel first
-          g2.setColor(Color.white);
-          g2.fillRect(0,0,this.getWidth(), this.getHeight());
+	int red = (int) (Math.random() * 256);
+	int green = (int) (Math.random() * 256);
+	int blue = (int) (Math.random() * 256);
+	Color randColor = new Color(red,green,blue);
 
-          // Draw the TireSwing
-          g2.setColor(Color.RED);
-          TireSwing test = new TireSwing(x, y, r, w);
-          g2.draw(test);
+	// Clear the panel first
+	g2.setColor(Color.BLACK);
+	g2.fillRect(0,0,this.getWidth(), this.getHeight());
+	
+	// Draw the TireSwing
+	g2.setStroke(thick);
+	g2.setColor(randColor);
+	TireSwing test = new TireSwing(x, y, r, w);
+	g2.rotate(Math.toRadians(drad), x, y);
+	g2.draw(test);
+
+	// Draw the TireSwing
+	g2.setStroke(thick);
+	g2.setColor(randColor);
+	TireSwing test2 = new TireSwing(x, y, r, w);
+	g2.rotate(Math.toRadians(drad + 10), x, y);
+	g2.draw(test2);
        }
     }
     
@@ -73,14 +91,15 @@ public class AnimatedPictureViewer {
           while (true) {
 
 	    if (r <= 3) {
-		dr = 2; 
-		dw = 2;
+		dr = 10; 
+		dw = 10;
 	    }
             if (r >= 320) {
-		dr = -2;
-		dw = -2;
+		dr = -10;
+		dw = -10;
 	    }
 	    
+	    drad++;
 	    r += dr;
 	    w += dw;
             panel.repaint();
